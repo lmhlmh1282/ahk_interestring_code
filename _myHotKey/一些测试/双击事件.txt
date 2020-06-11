@@ -1,0 +1,62 @@
+双击事件
+根据如上思路，编写如下代码：
+
+; 用于统计按键次数
+
+gnPressCount := 0
+
+$RButton::
+
+{
+
+        gnPressCount += 1
+
+        if gnPressCount = 1
+
+                SetTimer, ProcSubroutine, 400
+
+        Return
+
+}
+
+ProcSubroutine:
+
+{
+
+        ; 在计时器事件触发时，需要将其关掉
+
+        SetTimer, ProcSubroutine, Off
+
+        If gnPressCount = 1
+
+        {
+
+                ; 第一类行为
+
+                ; 在此处，我将其设为和通常的鼠标右键一样的功能，也即打开上下文菜单
+
+                Send {AppsKey}
+
+        }Else If gnPressCount = 2
+
+        {
+
+                ; 第二类行为
+
+                MsgBox, 触发双击鼠标右键事件
+
+        }Else
+
+        {
+
+                MsgBox, 触发三击鼠标右键事件
+
+        }
+
+        ; 在结束后，还需要将鼠标右键的按键次数置为0，以方便下次使用
+
+        gnPressCount := 0
+
+        Return
+
+}

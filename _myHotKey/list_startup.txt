@@ -1,0 +1,1 @@
+run, %A_ScriptDir%\MyHotKey.exe
